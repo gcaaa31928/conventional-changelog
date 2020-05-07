@@ -1,53 +1,54 @@
 {
-  "name": "conventional-changelog",
-  "version": "3.1.16",
-  "description": "Generate a changelog from git metadata",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/conventional-changelog/conventional-changelog.git"
-  },
-  "keywords": [
-    "conventional-changelog",
-    "conventional",
-    "changelog",
-    "log"
-  ],
-  "engines": {
-    "node": ">=10"
-  },
-  "license": "MIT",
-  "files": [
-    "index.js"
-  ],
-  "contributors": [
-    {
-      "name": "Brian Ford"
-    },
-    {
-      "name": "Vojta Jína"
-    },
-    {
-      "name": "Andrew Joslin"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/conventional-changelog/issues"
-  },
-  "homepage": "https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog#readme",
-  "dependencies": {
-    "conventional-changelog-angular": "file:../conventional-changelog-angular",
-    "conventional-changelog-atom": "file:../conventional-changelog-atom",
-    "conventional-changelog-codemirror": "file:../conventional-changelog-codemirror",
-    "conventional-changelog-conventionalcommits": "file:../conventional-changelog-conventionalcommits",
-    "conventional-changelog-core": "file:../conventional-changelog-core",
-    "conventional-changelog-ember": "file:../conventional-changelog-ember",
-    "conventional-changelog-eslint": "file:../conventional-changelog-eslint",
-    "conventional-changelog-express": "file:../conventional-changelog-express",
-    "conventional-changelog-jquery": "file:../conventional-changelog-jquery",
-    "conventional-changelog-jshint": "file:../conventional-changelog-jshint",
-    "conventional-changelog-preset-loader": "file:../conventional-changelog-preset-loader"
-  },
-  "scripts": {
-    "test-windows": "mocha --timeout 30000"
-  }
+	"name": "conventional-changelog",
+	"version": "3.1.16",
+	"description": "Generate a changelog from git metadata",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/conventional-changelog/conventional-changelog.git"
+	},
+	"keywords": [
+		"conventional-changelog",
+		"conventional",
+		"changelog",
+		"log"
+	],
+	"engines": {
+		"node": ">=10"
+	},
+	"license": "MIT",
+	"files": [
+		"index.js"
+	],
+	"contributors": [
+		{
+			"name": "Brian Ford"
+		},
+		{
+			"name": "Vojta Jína"
+		},
+		{
+			"name": "Andrew Joslin"
+		}
+	],
+	"bugs": {
+		"url": "https://github.com/conventional-changelog/conventional-changelog/issues"
+	},
+	"homepage": "https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog#readme",
+	"dependencies": {
+		"conventional-changelog-synology": "file:../conventional-changelog-synology",
+		"conventional-changelog-angular": "file:../conventional-changelog-angular",
+		"conventional-changelog-atom": "file:../conventional-changelog-atom",
+		"conventional-changelog-codemirror": "file:../conventional-changelog-codemirror",
+		"conventional-changelog-conventionalcommits": "file:../conventional-changelog-conventionalcommits",
+		"conventional-changelog-core": "file:../conventional-changelog-core",
+		"conventional-changelog-ember": "file:../conventional-changelog-ember",
+		"conventional-changelog-eslint": "file:../conventional-changelog-eslint",
+		"conventional-changelog-express": "file:../conventional-changelog-express",
+		"conventional-changelog-jquery": "file:../conventional-changelog-jquery",
+		"conventional-changelog-jshint": "file:../conventional-changelog-jshint",
+		"conventional-changelog-preset-loader": "file:../conventional-changelog-preset-loader"
+	},
+	"scripts": {
+		"test-windows": "mocha --timeout 30000"
+	}
 }

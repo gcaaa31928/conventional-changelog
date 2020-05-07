@@ -1,7 +1,7 @@
 'use strict'
 
 var conventionalChangelogCore = require('conventional-changelog-core')
-var angular = require('conventional-changelog-angular')
+var synology = require('conventional-changelog-synology')
 var fs = require('fs')
 var accessSync = require('fs-access').sync
 var chalk = require('chalk')
@@ -10,7 +10,7 @@ var sprintf = require('sprintf-js').sprintf
 
 function conventionalChangelog (options, context, gitRawCommitsOpts, parserOpts, writerOpts) {
   options = options || {}
-  options.config = angular
+  options.config = synology;
   return conventionalChangelogCore(options, context, gitRawCommitsOpts, parserOpts, writerOpts)
 }
 
