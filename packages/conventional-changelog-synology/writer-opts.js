@@ -25,24 +25,18 @@ module.exports = Q.all([
 function getWriterOpts () {
   return {
     transform: (commit, context) => {
-      let discard = true
       const issues = []
-
-      commit.notes.forEach(note => {
-        note.title = 'BREAKING CHANGES'
-        discard = false
-      })
-
-      if (commit.type === 'feat') {
+      let discard = false;
+      if (!commit.project) {
+        discard = true;
+      } if (commit.type === 'feat') {
         commit.type = 'Features'
-      } else if (commit.type === 'fix') {
+      } else if (commit.type === 'fixed') {
         commit.type = 'Bug Fixes'
       } else if (commit.type === 'perf') {
         commit.type = 'Performance Improvements'
       } else if (commit.type === 'revert' || commit.revert) {
         commit.type = 'Reverts'
-      } else if (discard) {
-        return
       } else if (commit.type === 'docs') {
         commit.type = 'Documentation'
       } else if (commit.type === 'style') {
@@ -57,6 +51,9 @@ function getWriterOpts () {
         commit.type = 'Continuous Integration'
       }
 
+      if (discard) {
+        return;
+      }
       if (commit.scope === '*') {
         commit.scope = ''
       }
@@ -64,40 +61,34 @@ function getWriterOpts () {
       if (typeof commit.hash === 'string') {
         commit.shortHash = commit.hash.substring(0, 7)
       }
-
-      if (typeof commit.subject === 'string') {
-        let url = context.repository
-          ? `${context.host}/${context.owner}/${context.repository}`
-          : context.repoUrl
-        if (url) {
-          url = `${url}/issues/`
-          // Issue URLs.
-          commit.subject = commit.subject.replace(/#([0-9]+)/g, (_, issue) => {
-            issues.push(issue)
-            return `[#${issue}](${url}${issue})`
-          })
+      if (typeof commit.header === 'string' && commit.project) {
+        let projectId = -1;
+        switch (commit.project) {
+          case 'Test':
+            projectId = 27;
+            break;
+          case 'DSM':
+            projectId = 27;
+            break;
+          case 'SynoVueComponents':
+            projectId = 729;
+            break;
+          case 'ComponentDemo':
+            projectId = 729;
+            break;
+          default:
+            return;
         }
-        if (context.host) {
-          // User URLs.
-          commit.subject = commit.subject.replace(/\B@([a-z0-9](?:-?[a-z0-9/]){0,38})/g, (_, username) => {
-            if (username.includes('/')) {
-              return `@${username}`
-            }
-
-            return `[@${username}](${context.host}/${username})`
-          })
+        const matches = commit.header.match(/[0-9]+/g);
+        if (matches) {
+          for (const issueId of matches) {
+            let url = `[${commit.project} #${issueId}](https://bug.synology.com/report/project_list.php?project_id=${projectId}&report_id=${issueId})`;
+            console.log(url);
+            issues.push(url)
+          }
         }
       }
-
-      // remove references that already appear in the subject
-      commit.references = commit.references.filter(reference => {
-        if (issues.indexOf(reference.issue) === -1) {
-          return true
-        }
-
-        return false
-      })
-
+      commit.issues = issues;
       return commit
     },
     groupBy: 'type',

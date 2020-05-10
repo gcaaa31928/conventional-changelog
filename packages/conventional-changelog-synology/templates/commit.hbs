@@ -4,3 +4,26 @@
 {{~else}}
   {{~header}}
 {{~/if}}
+
+{{~!-- commit link --}} {{#if @root.linkReferences~}}
+  ([{{shortHash}}](
+  {{~#if @root.repository}}
+    {{~#if @root.host}}
+      {{~@root.host}}/
+    {{~/if}}
+    {{~#if @root.owner}}
+      {{~@root.owner}}/
+    {{~/if}}
+    {{~@root.repository}}
+  {{~else}}
+    {{~@root.repoUrl}}
+  {{~/if}}/
+  {{~@root.commit}}/{{hash}}))
+{{~else}}
+  {{~shortHash}}
+{{~/if}}
+
+{{~!-- commit references --}} {{~#if issues~}}
+  , closes {{~#each issues}} {{this}}
+  {{/each}}
+{{~/if}}
